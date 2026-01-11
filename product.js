@@ -85,3 +85,5 @@ function addToCart(productId) {
 
     document.body.appendChild(notification);
 }
+
+window.addToCart = addToCart;
