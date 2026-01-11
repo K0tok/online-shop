@@ -56,7 +56,7 @@ async function loadProducts(page = 1, category_id = 0) {
             productEl.className = 'product';
 
             productEl.innerHTML = `
-            <div class="product" onclick="openProductPage(${element.id})">
+            <div onclick="openProductPage(${element.id})">
                 <img src="${element.img}" alt="${element.name}">
                 <h3>${element.name}</h3>
                 <p class="price">${element.price} ₽</p>
@@ -110,19 +110,19 @@ function loadPages(page, total_pages, category_id) {
 }
 
 function addToCart(productId) {
-  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-  const existing = cart.find(item => item.id === productId);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({ id: productId, quantity: 1 });
-  }
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ id: productId, quantity: 1 });
+    }
 
-  localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
 
-  const notification = document.createElement('div');
-  notification.innerHTML = `
+    const notification = document.createElement('div');
+    notification.innerHTML = `
     Товар добавлен в корзину!
     <button style="
       background: none;
@@ -135,7 +135,7 @@ function addToCart(productId) {
       margin-left: 10px;
     ">&times;</button>
   `;
-  notification.style.cssText = `
+    notification.style.cssText = `
     position: fixed;
     top: 40px;
     right: 20px;
@@ -151,18 +151,18 @@ function addToCart(productId) {
     font-family: sans-serif;
   `;
 
-  const closeBtn = notification.querySelector('button');
-  closeBtn.onclick = () => notification.remove();
+    const closeBtn = notification.querySelector('button');
+    closeBtn.onclick = () => notification.remove();
 
-  setTimeout(() => {
-    if (notification.parentNode) notification.remove();
-  }, 2000);
+    setTimeout(() => {
+        if (notification.parentNode) notification.remove();
+    }, 2000);
 
-  document.body.appendChild(notification);
+    document.body.appendChild(notification);
 }
 
 function openProductPage(productId) {
-  window.location.href = `product.html?id=${productId}`;
+    window.location.href = `product.html?id=${productId}`;
 }
 
 window.addToCart = addToCart;
